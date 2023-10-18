@@ -1,6 +1,6 @@
 // Exercise 0
 const int ledPin =    LED_BUILTIN;  // The onboard LED pin
-const int delayTime = 50;           // Delay time in milliseconds (1 second)
+const int delayTime = 1000;         // Delay time in milliseconds (1 second)
 
 void setup() {
   pinMode(ledPin, OUTPUT);
