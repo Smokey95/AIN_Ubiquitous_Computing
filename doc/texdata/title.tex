@@ -1,0 +1,49 @@
+\begin{titlepage}
+\color{white}
+\sffamily\small
+
+%------------------------------------------------------------------------------- TITLE
+\begin{textblock}{10}(-0.8,8.3)
+	\parTa{\textbf{\docTitle}}
+\end{textblock}
+
+%------------------------------------------------------------------------------- SUBTITLE
+\begin{textblock}{10}(-0.8,9.5)
+	\parTb{\docSubTitle}
+\end{textblock}
+
+%------------------------------------------------------------------------------- CREATOR
+\newcommand{\creatorX}{8.9}
+
+\begin{textblock}{10}(\creatorX,0.5)
+	\parTc{\textbf{Submitted by:}}
+\end{textblock}
+
+\begin{textblock}{10}(\creatorX,0.8)
+	\parTc{\docCreater}
+\end{textblock}
+
+\begin{textblock}{10}(\creatorX,1.1)
+	\parTc{ID: \docCreaterID}
+\end{textblock}
+
+\begin{textblock}{10}(\creatorX,1.4)
+	\parTc{\docCreatorMail}
+\end{textblock}
+
+%------------------------------------------------------------------------------- LOCATION & DATE
+\begin{textblock}{10}(8.89,11.80)
+	\parTc{\textbf{\docLocation , \docDate}}	
+\end{textblock}
+
+%------------------------------------------------------------------------------- BACKGROUND
+\ThisCenterWallPaper{1}{texdata/titlepage/htwg_in_ger_dark.pdf}
+\clearpage
+
+
+\color{black}
+
+% Now with line boarders 
+\newgeometry{a4paper,left=3cm,right=3cm,bottom =2cm}
+
+\end{titlepage}

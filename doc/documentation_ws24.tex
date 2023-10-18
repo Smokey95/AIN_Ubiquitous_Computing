@@ -1,0 +1,50 @@
+
+%%---------------------------------------------------------------------------------------------------------------------- Preamble
+\input{texdata/preamble}
+
+%%---------------------------------------------------------------------------------------------------------------------- Defines
+\input{texdata/defines}
+
+%%---------------------------------------------------------------------------------------------------------------------- Document Begin
+\begin{document}
+
+%%------------------------------------------------------------------------------ Titlepage
+\input{texdata/title.tex}
+
+%%------------------------------------------------------------------------------ Table of Content
+\pagenumbering{roman}
+
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+\newpage
+
+\printacronyms[heading=chapter*]
+\newpage
+
+\pagenumbering{arabic}
+
+%%------------------------------------------------------------------------------ Chapters
+\chapter{Example Section 1}
+\input{\sectionsPath/example_section_1.tex}
+
+\chapter{Example Section 2}
+\input{\sectionsPath/example_section_2.tex}
+
+\chapter{Example Section 3}
+\input{\sectionsPath/example_section_3.tex}
+
+%%------------------------------------------------------------------------------ References
+%Adding references to table of content
+\phantomsection 
+\addcontentsline{toc}{chapter}{References} 
+
+%Change bibliography name
+\renewcommand{\bibname}{References}
+
+%Print bibliography
+\printbibliography
+
+\end{document}
+%%---------------------------------------------------------------------------------------------------------------------- Document End

@@ -1,0 +1,100 @@
+
+\documentclass[11pt]{report}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\usepackage[a4paper,left=3cm,right=3cm,bottom =2cm]{geometry}
+
+%\usepackage{natbib}
+
+% urls in sources
+\usepackage{url}
+\usepackage{graphicx}
+
+% chapter headers format
+\usepackage{titlesec}
+\titleformat{\chapter}
+  {\normalfont\bfseries\Huge}{\thechapter}{22pt}{\Huge}
+
+\makeatletter
+\let\my@chapter\@chapter
+\renewcommand*{\@chapter}{%
+  \addtocontents{lol}{\protect\addvspace{10pt}}%
+  \my@chapter}
+\makeatother
+
+% acronyms
+\usepackage{array}
+\usepackage{acro}
+\input{sections/acronyms.tex}
+
+% line spacing
+\usepackage{setspace}
+
+% links in references
+\usepackage[hidelinks]{hyperref}
+
+% smart references
+\usepackage[noabbrev,nameinlink]{cleveref}
+
+% wrap text around images
+\usepackage{wrapfig}
+
+% line spacing
+\usepackage{setspace}
+\setstretch{1.25}
+
+% float at exactly here
+\usepackage{float}
+
+% rotate figures
+\usepackage{adjustbox}
+\usepackage{blindtext}
+
+%for multiline tables
+\usepackage{multirow}
+\usepackage{tabularx}
+
+%thick lines
+\usepackage{booktabs}
+
+%bibliography/ references
+\usepackage[backend=bibtex]{biblatex}
+
+%%Wallpaper package
+\usepackage{wallpaper,lipsum}
+
+%%Textpos package
+\usepackage{textpos}
+
+\usepackage{listings}
+\usepackage{color}
+
+%Wrapping Picture around text
+\usepackage{wrapfig}
+
+%Code highlighting
+\usepackage[outputdir=D:/AIN_Ubiquitous_Computing/doc/outdata]{minted}
+\usemintedstyle{perldoc}
+\usepackage{xcolor} % to access the named color LightGray
+
+
+%forest
+\usepackage{forest}
+
+\def\Size{4pt}
+\tikzset{
+  folder/.pic={
+    \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+      (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);  
+    \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+      (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  }
+}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+% list all used packages and their versions to the logfile
+\listfiles
