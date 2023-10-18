@@ -11,19 +11,31 @@ void setup() {
 }
 
 void loop() {
+  blink_red();
+  delay(delayTime);
+  blink_blue();
+  delay(delayTime);
+  blink_green();
+  delay(delayTime);
+}
+
+void blink_red(){
   Serial.print("Red\n");
   digitalWrite(LEDR, HIGH);   // Red
   digitalWrite(LEDB, LOW);    // Blue
   digitalWrite(LEDG, LOW);    // Green
-  delay(delayTime);
-  Serial.print("Blue\n");
-  digitalWrite(LEDR, LOW);
-  digitalWrite(LEDB, HIGH);
-  digitalWrite(LEDG, LOW);
-  delay(delayTime);
+}
+
+void blink_blue(){
+  Serial.print("Blue\n");     
+  digitalWrite(LEDR, LOW);    // Red
+  digitalWrite(LEDB, HIGH);   // Blue
+  digitalWrite(LEDG, LOW);    // Green
+}
+
+void blink_green(){
   Serial.print("Green\n");
-  digitalWrite(LEDR, LOW);
-  digitalWrite(LEDB, LOW);
-  digitalWrite(LEDG, HIGH);
-  delay(delayTime);
+  digitalWrite(LEDR, LOW);    // Red
+  digitalWrite(LEDB, LOW);    // Blue
+  digitalWrite(LEDG, HIGH);   // Green
 }
