@@ -1,0 +1,56 @@
+[
+    {
+        "id": "91d5ab1b9e8e562c",
+        "type": "tab",
+        "label": "Exercise 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ae11657a1bc4f1cf",
+        "type": "inject",
+        "z": "91d5ab1b9e8e562c",
+        "name": "hello",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello World!",
+        "payloadType": "str",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "53b12198d4016d51"
+            ]
+        ]
+    },
+    {
+        "id": "53b12198d4016d51",
+        "type": "debug",
+        "z": "91d5ab1b9e8e562c",
+        "name": "debug: string_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 160,
+        "wires": []
+    }
+]

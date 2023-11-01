@@ -1,0 +1,243 @@
+[
+    {
+        "id": "eacd0d0e4d2b2036",
+        "type": "tab",
+        "label": "Exercise 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "58ae7aa364a118f9",
+        "type": "inject",
+        "z": "eacd0d0e4d2b2036",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 650,
+        "y": 420,
+        "wires": [
+            [
+                "9f0e50875c53dfea",
+                "2ebfcf246b688927",
+                "de93fe98d2ffd220",
+                "e88efbcfca3ddc83"
+            ]
+        ]
+    },
+    {
+        "id": "9f0e50875c53dfea",
+        "type": "debug",
+        "z": "eacd0d0e4d2b2036",
+        "name": "debug: timestamp_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2ebfcf246b688927",
+        "type": "moment",
+        "z": "eacd0d0e4d2b2036",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "Europe/Berlin",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "DD/MM/YYYY",
+        "locale": "de_DE",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Europe/Berlin",
+        "x": 960,
+        "y": 420,
+        "wires": [
+            [
+                "05d13440101620d2",
+                "8c4adf19daae7a56"
+            ]
+        ]
+    },
+    {
+        "id": "05d13440101620d2",
+        "type": "debug",
+        "z": "eacd0d0e4d2b2036",
+        "name": "debug: date_formatted",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "8c4adf19daae7a56",
+        "type": "rbe",
+        "z": "eacd0d0e4d2b2036",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1190,
+        "y": 400,
+        "wires": [
+            [
+                "b1c07cd139d7539e"
+            ]
+        ]
+    },
+    {
+        "id": "de93fe98d2ffd220",
+        "type": "moment",
+        "z": "eacd0d0e4d2b2036",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "Europe/Berlin",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "dddd, MMMM DD, YYYY hh:mm",
+        "locale": "de_DE",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Europe/Berlin",
+        "x": 960,
+        "y": 520,
+        "wires": [
+            [
+                "770d900197a0db42",
+                "2990bac498a03cc5"
+            ]
+        ]
+    },
+    {
+        "id": "770d900197a0db42",
+        "type": "debug",
+        "z": "eacd0d0e4d2b2036",
+        "name": "debug: date_long",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b1c07cd139d7539e",
+        "type": "ui_text",
+        "z": "eacd0d0e4d2b2036",
+        "group": "9d3babfa6f091dfa",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1330,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e88efbcfca3ddc83",
+        "type": "ui_text",
+        "z": "eacd0d0e4d2b2036",
+        "group": "9d3babfa6f091dfa",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "EPOCH",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 920,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2990bac498a03cc5",
+        "type": "ui_text",
+        "z": "eacd0d0e4d2b2036",
+        "group": "9d3babfa6f091dfa",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date - Standard Format",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1230,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "9d3babfa6f091dfa",
+        "type": "ui_group",
+        "name": "Dashboard: Time",
+        "tab": "deb0eaf89b8ae720",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "deb0eaf89b8ae720",
+        "type": "ui_tab",
+        "name": "Time",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,214 @@
+[
+    {
+        "id": "f0ec3adf2851efab",
+        "type": "tab",
+        "label": "Exercise 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2cf7e5e634cff725",
+        "type": "serial in",
+        "z": "f0ec3adf2851efab",
+        "name": "Arduino",
+        "serial": "9bb70a704192f291",
+        "x": 750,
+        "y": 220,
+        "wires": [
+            [
+                "22432cd711995808",
+                "868d49460c5b159f"
+            ]
+        ]
+    },
+    {
+        "id": "22432cd711995808",
+        "type": "debug",
+        "z": "f0ec3adf2851efab",
+        "name": "debug: data_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "868d49460c5b159f",
+        "type": "split",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "splt": "=",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 930,
+        "y": 220,
+        "wires": [
+            [
+                "dc878ec9d84ff89a"
+            ]
+        ]
+    },
+    {
+        "id": "4e4741bde26dc175",
+        "type": "debug",
+        "z": "f0ec3adf2851efab",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b48dfee4b55e252d",
+        "type": "ui_gauge",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "group": "4cc82d2ba5fd52bf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Real Time Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#0000ff",
+            "#00ff40",
+            "#ca3838"
+        ],
+        "seg1": "15",
+        "seg2": "25",
+        "diff": false,
+        "className": "",
+        "x": 1270,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "dc878ec9d84ff89a",
+        "type": "switch",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "°C",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1050,
+        "y": 220,
+        "wires": [
+            [
+                "4e4741bde26dc175",
+                "b48dfee4b55e252d",
+                "a8687074d5f9a372"
+            ]
+        ]
+    },
+    {
+        "id": "a8687074d5f9a372",
+        "type": "ui_chart",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "group": "4cc82d2ba5fd52bf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature Course",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "40",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1260,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9bb70a704192f291",
+        "type": "serial-port",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "4cc82d2ba5fd52bf",
+        "type": "ui_group",
+        "name": "Temperature",
+        "tab": "f702b95c84d162c0",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f702b95c84d162c0",
+        "type": "ui_tab",
+        "name": "Temperature",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

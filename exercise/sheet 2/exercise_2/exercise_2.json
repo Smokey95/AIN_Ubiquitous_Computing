@@ -1,0 +1,85 @@
+[
+    {
+        "id": "d0cfb1b38f864df2",
+        "type": "tab",
+        "label": "Exercise 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "641ad2da8a2ce31d",
+        "type": "inject",
+        "z": "d0cfb1b38f864df2",
+        "name": "World",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello World!",
+        "payloadType": "str",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "1d22c4e94f837b86"
+            ]
+        ]
+    },
+    {
+        "id": "a47de058f0f6c6d8",
+        "type": "debug",
+        "z": "d0cfb1b38f864df2",
+        "name": "debug: string_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1d22c4e94f837b86",
+        "type": "change",
+        "z": "d0cfb1b38f864df2",
+        "name": "World->Mars",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "World",
+                "fromt": "str",
+                "to": "Mars",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "a47de058f0f6c6d8"
+            ]
+        ]
+    }
+]
