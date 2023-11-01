@@ -23,9 +23,13 @@ void loop() {
     IMU.readTemperature(temperature_deg);
 
     // Offset of ~30%
-    int temperature_normalized = temperature_deg / 1.3;
+    float temperature_normalized = temperature_deg / 1.3;
 
-    print_temp_serial(temperature_normalized);
+    // Create a JSON-formatted string
+    String jsonString = "{\"temp\": " + String(temperature_normalized) + "}";
+
+    // Send JSON-formatted string over serial
+    Serial.println(jsonString);
 
     if(temperature_normalized > 36) {
       blink_red();
@@ -37,7 +41,7 @@ void loop() {
     }
     
   }
-  delay(1000);  // measure every second
+  delay(5000);  // measure every second
 }
 
 void print_temp_serial(int temp){

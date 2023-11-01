@@ -1,0 +1,223 @@
+[
+    {
+        "id": "f0ec3adf2851efab",
+        "type": "tab",
+        "label": "Exercise 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2cf7e5e634cff725",
+        "type": "serial in",
+        "z": "f0ec3adf2851efab",
+        "name": "Arduino",
+        "serial": "9bb70a704192f291",
+        "x": 750,
+        "y": 220,
+        "wires": [
+            [
+                "22432cd711995808",
+                "64425394ece1c69e"
+            ]
+        ]
+    },
+    {
+        "id": "22432cd711995808",
+        "type": "debug",
+        "z": "f0ec3adf2851efab",
+        "name": "debug: data_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "4e4741bde26dc175",
+        "type": "debug",
+        "z": "f0ec3adf2851efab",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a8687074d5f9a372",
+        "type": "ui_chart",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "group": "4cc82d2ba5fd52bf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature Course",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "40",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1320,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "64425394ece1c69e",
+        "type": "json",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "property": "payload.temp",
+        "action": "",
+        "pretty": false,
+        "x": 930,
+        "y": 220,
+        "wires": [
+            [
+                "4e4741bde26dc175",
+                "d159efd1a00e8625"
+            ]
+        ]
+    },
+    {
+        "id": "6bcef3e902d1fe35",
+        "type": "ui_gauge",
+        "z": "f0ec3adf2851efab",
+        "name": "",
+        "group": "4cc82d2ba5fd52bf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1270,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d159efd1a00e8625",
+        "type": "function",
+        "z": "f0ec3adf2851efab",
+        "name": "function 1",
+        "func": "    try {\n        // Parse the JSON object from the message payload\n        const data = JSON.parse(msg.payload);\n\n        // Extract the temperature value\n        const temperature = parseFloat(data.temp);\n\n        // Set the message payload to the extracted temperature value\n        msg.payload = temperature;\n\n        // Return the modified message object\n        return msg;\n    } catch (error) {\n        // If an error occurs during parsing, log the error and return null\n        console.error('Error occurred while parsing temperature:', error);\n        return null;\n    }",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 260,
+        "wires": [
+            [
+                "170ab4c95ffaf485",
+                "6bcef3e902d1fe35",
+                "a8687074d5f9a372"
+            ]
+        ]
+    },
+    {
+        "id": "170ab4c95ffaf485",
+        "type": "debug",
+        "z": "f0ec3adf2851efab",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9bb70a704192f291",
+        "type": "serial-port",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "4cc82d2ba5fd52bf",
+        "type": "ui_group",
+        "name": "Temperature",
+        "tab": "13776e66c00bb7b6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "13776e66c00bb7b6",
+        "type": "ui_tab",
+        "name": "TEMP",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
