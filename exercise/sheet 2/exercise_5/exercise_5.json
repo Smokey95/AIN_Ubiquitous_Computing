@@ -1,0 +1,329 @@
+[
+    {
+        "id": "6486588f6420a471",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9b5b5a4a9425080d",
+        "type": "ui_switch",
+        "z": "6486588f6420a471",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "273da5432a4fa010",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "switch",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "3e1a81c4869dec84",
+                "a76c7d94f5b38ef8"
+            ]
+        ]
+    },
+    {
+        "id": "6a8f4377ab09934b",
+        "type": "inject",
+        "z": "6486588f6420a471",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 230,
+        "y": 260,
+        "wires": [
+            [
+                "9b5b5a4a9425080d"
+            ]
+        ]
+    },
+    {
+        "id": "a7913cfd15caf445",
+        "type": "inject",
+        "z": "6486588f6420a471",
+        "name": "1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "9b5b5a4a9425080d"
+            ]
+        ]
+    },
+    {
+        "id": "3e1a81c4869dec84",
+        "type": "serial out",
+        "z": "6486588f6420a471",
+        "name": "",
+        "serial": "9bb70a704192f291",
+        "x": 750,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a76c7d94f5b38ef8",
+        "type": "debug",
+        "z": "6486588f6420a471",
+        "name": "debug: send",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8ae53abd1440a9f2",
+        "type": "ui_led",
+        "z": "6486588f6420a471",
+        "order": 0,
+        "group": "273da5432a4fa010",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#ffffff",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 750,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1e505a0890df3862",
+        "type": "serial in",
+        "z": "6486588f6420a471",
+        "name": "",
+        "serial": "9bb70a704192f291",
+        "x": 50,
+        "y": 420,
+        "wires": [
+            [
+                "5743a2903c1dc848"
+            ]
+        ]
+    },
+    {
+        "id": "5743a2903c1dc848",
+        "type": "split",
+        "z": "6486588f6420a471",
+        "name": "",
+        "splt": "1",
+        "spltType": "len",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "aa2dd32909d31c28"
+            ]
+        ]
+    },
+    {
+        "id": "aa2dd32909d31c28",
+        "type": "switch",
+        "z": "6486588f6420a471",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 420,
+        "wires": [
+            [
+                "246c39fdec247340"
+            ],
+            [
+                "6e544efd48cea150"
+            ]
+        ]
+    },
+    {
+        "id": "11b13637d619c4e1",
+        "type": "debug",
+        "z": "6486588f6420a471",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "246c39fdec247340",
+        "type": "change",
+        "z": "6486588f6420a471",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "11b13637d619c4e1",
+                "8ae53abd1440a9f2"
+            ]
+        ]
+    },
+    {
+        "id": "6e544efd48cea150",
+        "type": "change",
+        "z": "6486588f6420a471",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 440,
+        "wires": [
+            [
+                "11b13637d619c4e1",
+                "8ae53abd1440a9f2"
+            ]
+        ]
+    },
+    {
+        "id": "273da5432a4fa010",
+        "type": "ui_group",
+        "name": "Dashboard: LED",
+        "tab": "14fc26af7d4ab2cd",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9bb70a704192f291",
+        "type": "serial-port",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "14fc26af7d4ab2cd",
+        "type": "ui_tab",
+        "name": "LED",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
