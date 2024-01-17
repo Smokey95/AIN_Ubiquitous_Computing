@@ -66,13 +66,18 @@ void loop() {
 
   // Send data to MQTT server
   publish_message("temp", String(temperature_deg));
+
+  // Blink LED to indicate data send
+  blink_data_send();
 }
 
 void setup_MQTT(){
   Serial.println("Setting up MQTT...");
+  blink_once();
 
   mqttClient.setServer(mqtt_server, mqtt_port);
   mqttClient.setCallback(callback);
+  blink_once();
 
   for (int i = 0; i < 5; i++){
     blink_once();
@@ -87,7 +92,7 @@ void setup_MQTT(){
         Serial.print(mqttClient.state());
         Serial.println(" try again in 5 seconds");
         // Wait 5 seconds before retrying
-        delay(5000);
+        blink_connection(5);
       }
     }
   }
@@ -178,9 +183,9 @@ void printMacAddress(byte mac[]) {
 
 void setup_Serial(){
   Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
+  //while (!Serial) {
+  //  ; // wait for serial port to connect. Needed for native USB port only
+  //}
   blink_once();
 }
 
@@ -191,6 +196,7 @@ void setup_wifi_connection(){
     // don't continue
     blink_error();
   }
+  blink_once();
 
   String fv = WiFi.firmwareVersion();
   if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
@@ -207,7 +213,7 @@ void setup_wifi_connection(){
     status = WiFi.begin(ssid, pass);
 
     // wait 10 seconds for connection:
-    blink_connection();
+    blink_connection(10);
 
     attempts++;
   }
@@ -241,8 +247,14 @@ void blink_once(){
   delay(100);
 }
 
-void blink_connection(){
-  for (int i = 0; i < 10; i++){
+void blink_data_send(){
+  digitalWrite(led_out, HIGH);
+  delay(40);
+  digitalWrite(led_out, LOW);
+}
+
+void blink_connection(int time_sec){
+  for (int i = 0; i < time_sec; i++){
     digitalWrite(led_out, HIGH);
     delay(500);
     digitalWrite(led_out, LOW);
