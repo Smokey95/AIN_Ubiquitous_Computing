@@ -1,3 +1,4 @@
 *.vscode
 *\outdata
 *.csv
+*\credentials.h
