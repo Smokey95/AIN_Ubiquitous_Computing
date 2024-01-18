@@ -18,7 +18,7 @@ const int led_out  = 3;
 #define MAX_WIFI_CONNECTION_ATTEMPTS 5  // Number of attempts to connect to WiFi
 const char ssid[]   = WIFI_SSID;        // your network SSID (name)
 const char pass[]   = WIFI_PASS;        // your network password (use for WPA, or use as key for WEP)
-int status    = WL_IDLE_STATUS;         // the WiFi radio's status
+int status          = WL_IDLE_STATUS;   // the WiFi radio's status
 
 /* MQTT Connection Details */
 const char* mqtt_server   = MQTT_SERVER;
@@ -56,7 +56,7 @@ void setup(){
 
 void loop() {
 
-  delay(1000);
+  delay(10000);
 
   // Read temperature from IMU
   int temperature_deg = get_temperature();
@@ -65,10 +65,8 @@ void loop() {
   print_temp_serial(temperature_deg);
 
   // Send data to MQTT server
-  publish_message("temp", String(temperature_deg));
+  publish_message("letterbox_alive", String("true"));
 
-  // Blink LED to indicate data send
-  blink_data_send();
 }
 
 void setup_MQTT(){
@@ -118,6 +116,7 @@ void publish_message(const char* topic, String payload){
   }
   mqttClient.publish(topic, payload.c_str(), true);
   Serial.println("Message published to MQTT server: " + payload);
+  blink_data_send();
 }
 
 void setup_IMU(){
