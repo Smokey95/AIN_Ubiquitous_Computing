@@ -9,21 +9,35 @@
  ******************************************************************************/
 #include <WiFiNINA.h>
 #include <Arduino_LSM6DSOX.h>
+#include <PubSubClient.h>
 
 #include "lib\credentials.h"
+#include "lib\topics.h"
 
 /*******************************************************************************
  * Constants
  ******************************************************************************/
-const int PIN_RED_LED     = 2;        /**< GPIO pin for red LED */
-const int PIN_GREEN_LED   = 3;        /**< GPIO pin for green LED */
-const int PIN_BLUE_LED    = 4;        /**< GPIO pin for blue LED */
+const int PIN_RED_LED     = 2;              /**< GPIO pin for red LED */
+const int PIN_GREEN_LED   = 3;              /**< GPIO pin for green LED */
+const int PIN_BLUE_LED    = 4;              /**< GPIO pin for blue LED */
 
 /* WIFI Connection Details */
-#define MAX_WIFI_CONNECTION_ATTEMPTS 5  /**< Attempts to connect to WiFi */
-const char ssid[]   = WIFI_SSID;        /**< network SSID (name) */
-const char pass[]   = WIFI_PASS;        /**< network password */
-int status          = WL_IDLE_STATUS;   /**< WiFi radio's status */
+#define MAX_WIFI_CONNECTION_ATTEMPTS 5      /**< Attempts to connect to WiFi */
+const char ssid[]   = WIFI_SSID;            /**< network SSID (name) */
+const char pass[]   = WIFI_PASS;            /**< network password */
+int status          = WL_IDLE_STATUS;       /**< WiFi radio's status */
+
+/* MQTT Connection Details */
+const char* mqtt_server   = MQTT_SERVER;    /**< MQTT server address */
+const char* mqtt_username = MQTT_USERNAME;  /**< MQTT username */
+const char* mqtt_pw       = MQTT_PW;        /**< MQTT password */
+const char* client_id     = MQTT_CLIENT_ID; /**< MQTT client ID */
+const int   mqtt_port     = MQTT_PORT;      /**< MQTT port */
+
+/* WiFi Client Defintion */
+WiFiSSLClient wifiClient;
+PubSubClient mqttClient(wifiClient);
+
 
 /*******************************************************************************
  * Setup
@@ -40,6 +54,12 @@ void setup() {
 
   // Initialize WiFi connection
   init_wifi_connection();
+
+  // Initialize MQTT connection
+  init_MQTT();
+
+  // Show that setup is finished
+  blink_x_times(3, 0, 255, 0, 1000);
 }
 
 /*******************************************************************************
@@ -48,6 +68,17 @@ void setup() {
 
 void loop() {
 
+  static int loop_counter = 10;
+
+  mqttClient.loop();
+
+  if (loop_counter % 100 == 0){
+    send_alive();
+    loop_counter = 0;
+  }
+
+  loop_counter++;
+  delay(100);
 }
 
 /*******************************************************************************
@@ -99,6 +130,9 @@ void init_IMU(){
   print_temp_serial(get_temperature());
 }
 
+/**
+ * @brief   Initializes the WiFi connection
+*/
 void init_wifi_connection(){
   // check for the WiFi module:
   if (WiFi.status() == WL_NO_MODULE) {
@@ -139,6 +173,84 @@ void init_wifi_connection(){
   delay(1000);
 }
 
+/**
+ * @brief   Initializes the MQTT connection
+*/
+void init_MQTT(){
+  Serial.println("Setting up MQTT...");
+  blink_x_times(1, 0, 0, 255, 500);
+
+  mqttClient.setServer(mqtt_server, mqtt_port);
+  mqttClient.setCallback(callback);
+  blink_x_times(1, 0, 0, 255, 500);
+
+  for (int i = 0; i < 5; i++){
+    Serial.println("Connecting to MQTT server [" + String(i + 1) + "/5]...");
+    if (!mqttClient.connected()) {
+      if (mqttClient.connect(client_id, mqtt_username, mqtt_pw)) {
+        Serial.println("MQTT connected!");
+        mqttClient.subscribe(TP_LED);
+        Serial.println("Subscribed to topic: " + String(TP_LED));
+        break;
+      } else {
+        Serial.print("failed, rc=");
+        Serial.print(mqttClient.state());
+        Serial.println(" try again in 5 seconds");
+        // Wait 5 seconds before retrying
+        blink_x_times(5, 0, 0, 255, 1000);
+      }
+    }
+  }
+
+  if (!mqttClient.connected()) {
+    Serial.println("MQTT connection failed!");
+    error_state();
+  }
+}
+
+/*******************************************************************************
+ * MQTT Functions
+ ******************************************************************************/
+
+/**
+ * @brief   Callback function for MQTT
+*/
+void callback(char* topic, byte* payload, unsigned int length) {
+  String incomingMessage = "";
+  for (int i = 0; i < length; i++) {
+    incomingMessage += (char)payload[i];
+  }
+  incomingMessage.trim();
+  
+  Serial.println("Message received from MQTT server: " + incomingMessage);
+  if (incomingMessage == "1"){
+    setColor(255, 0, 0);
+  } else if (incomingMessage == "2"){
+    setColor(0, 255, 0);
+  } else if (incomingMessage == "3"){
+    setColor(0, 0, 255);
+  } else {
+    setColor(0, 0, 0);
+  }
+}
+
+void publish_message(const char* topic, String payload){
+  if (!mqttClient.connected()) {
+    Serial.print("MQTT connection lost! ");
+    Serial.println("Attempting to reconnect to MQTT server");
+    init_MQTT();
+  }
+
+  mqttClient.publish(topic, payload.c_str(), true);
+  Serial.println("Message published to MQTT server: " + payload);
+}
+
+/**
+ * @brief   Send an alive message to the MQTT server
+*/
+void send_alive(){
+  publish_message(TP_ALIVE, "true");
+}
 
 /*******************************************************************************
  * LED Functions
