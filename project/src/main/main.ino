@@ -21,6 +21,9 @@ const int PIN_RED_LED     = 2;              /**< GPIO pin for red LED */
 const int PIN_GREEN_LED   = 3;              /**< GPIO pin for green LED */
 const int PIN_BLUE_LED    = 4;              /**< GPIO pin for blue LED */
 
+const int PIN_DOOR_MAIN   = 5;              /**< GPIO pin for main door sensor */
+const int PIN_DOOR_LETTER = 6;              /**< GPIO pin for letter box door sensor */
+
 /* WIFI Connection Details */
 #define MAX_WIFI_CONNECTION_ATTEMPTS 5      /**< Attempts to connect to WiFi */
 const char ssid[]   = WIFI_SSID;            /**< network SSID (name) */
@@ -34,10 +37,20 @@ const char* mqtt_pw       = MQTT_PW;        /**< MQTT password */
 const char* client_id     = MQTT_CLIENT_ID; /**< MQTT client ID */
 const int   mqtt_port     = MQTT_PORT;      /**< MQTT port */
 
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+
 /* WiFi Client Defintion */
 WiFiSSLClient wifiClient;
 PubSubClient mqttClient(wifiClient);
 
+/* Door Status */
+bool door_main_open = false;                /**< Status of main door */
+bool door_main_prev = false;                /**< Previous status of main door */
+bool door_letter_open = false;              /**< Status of letter box door */
+bool door_letter_prev = false;              /**< Previous status of letter box door */
 
 /*******************************************************************************
  * Setup
@@ -58,8 +71,11 @@ void setup() {
   // Initialize MQTT connection
   init_MQTT();
 
-  // Show that setup is finished
+  // Show that general setup is finished
   blink_x_times(3, 0, 255, 0, 1000);
+
+  // Initialize door sensors
+  init_DoorSensors();
 }
 
 /*******************************************************************************
@@ -71,6 +87,10 @@ void loop() {
   static int loop_counter = 10;
 
   mqttClient.loop();
+
+  // Check door status
+  update_door_main_status();
+  update_door_letter_status();
 
   if (loop_counter % 100 == 0){
     send_alive();
@@ -129,6 +149,23 @@ void init_IMU(){
   blink_x_times(2, 0, 0, 255, 500);
   print_temp_serial(get_temperature());
 }
+
+void init_DoorSensors(){
+  // Initialize door sensors
+  pinMode(PIN_DOOR_MAIN, INPUT_PULLUP);
+  pinMode(PIN_DOOR_LETTER, INPUT_PULLUP);
+
+  // Check door status
+  update_door_main_status();
+  update_door_letter_status();
+
+  // Print door status
+  print_door_status();
+
+  // Show door status
+  show_door_status();
+}
+
 
 /**
  * @brief   Initializes the WiFi connection
@@ -252,6 +289,14 @@ void send_alive(){
   publish_message(TP_ALIVE, "true");
 }
 
+void send_main_door_status(){
+  publish_message(TP_DOOR_MAIN, String(door_main_open));
+}
+
+void send_letter_door_status(){
+  publish_message(TP_DOOR_LETTER, String(door_letter_open));
+}
+
 /*******************************************************************************
  * LED Functions
  ******************************************************************************/
@@ -285,6 +330,51 @@ void setColor(int R, int G, int B) {
   analogWrite(PIN_GREEN_LED, 255 - G);
   analogWrite(PIN_BLUE_LED, 255 - B);
 }
+
+/*******************************************************************************
+ * Door Functions
+ ******************************************************************************/
+
+void update_door_main_status(){
+  door_main_open = digitalRead(PIN_DOOR_MAIN);
+  if (door_main_open != door_main_prev){
+    door_main_prev = door_main_open;
+    show_door_status();
+    send_main_door_status();
+    if (door_main_open){
+      Serial.println("Main door opened!");
+    } else {
+      Serial.println("Main door closed!");
+    }
+  }
+}
+
+void update_door_letter_status(){
+  door_letter_open = digitalRead(PIN_DOOR_LETTER);
+  if (door_letter_open != door_letter_prev){
+    door_letter_prev = door_letter_open;
+    send_letter_door_status();
+    if (door_letter_open){
+      Serial.println("Letter box door opened!");
+    } else {
+      Serial.println("Letter box door closed!");
+    }
+  }
+}
+
+void print_door_status(){
+  Serial.println("Main door open: " + String(door_main_open));
+  Serial.println("Letter box door open: " + String(door_letter_open));
+}
+
+void show_door_status(){
+  if (door_main_open){
+    setColor(0, 255, 0);
+  } else {
+    setColor(0, 0, 0);
+  }
+}
+
 
 /*******************************************************************************
  * Error Functions
