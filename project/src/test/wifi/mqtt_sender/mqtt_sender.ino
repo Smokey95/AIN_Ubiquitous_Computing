@@ -10,9 +10,12 @@
 #include <PubSubClient.h>
 
 #include "credentials.h"
+#include "topics.h"
 
 /* LED Pin */
-const int led_out  = 3;
+const int PIN_RED_LED     = 2;
+const int PIN_BLUE_LED    = 3;
+const int PIN_GREEN_LED   = 4;
 
 /* WIFI Connection Details */
 #define MAX_WIFI_CONNECTION_ATTEMPTS 5  // Number of attempts to connect to WiFi
@@ -38,8 +41,10 @@ char msg[MSG_BUFFER_SIZE];
 
 void setup(){
   // Initialize LED
-  pinMode(led_out, OUTPUT);
-  blink_once();
+  pinMode(PIN_RED_LED, OUTPUT);
+  pinMode(PIN_BLUE_LED, OUTPUT);
+  pinMode(PIN_GREEN_LED, OUTPUT);
+  blink_once_blue();
 
   // Initialize Serial Interface
   setup_Serial();
@@ -56,34 +61,46 @@ void setup(){
 
 void loop() {
 
-  delay(10000);
+  static int loop_counter = 0;
+
+  mqttClient.loop();
 
   // Read temperature from IMU
   int temperature_deg = get_temperature();
 
-  // Print temperature to serial
-  print_temp_serial(temperature_deg);
+  if (loop_counter % 100 == 0){
+    // Print temperature to serial
+    print_temp_serial(temperature_deg);
 
-  // Send data to MQTT server
-  publish_message("letterbox_alive", String("true"));
+    // Send data to MQTT server
+    publish_message(TP_ALIVE, String("true"));
+    //publish_message(TP_TEMP, String(temperature_deg));
 
+    // Reset loop counter
+    loop_counter = 0;
+  }
+
+  delay(100);
+
+  loop_counter++;
 }
 
 void setup_MQTT(){
   Serial.println("Setting up MQTT...");
-  blink_once();
+  blink_once_blue();
 
   mqttClient.setServer(mqtt_server, mqtt_port);
   mqttClient.setCallback(callback);
-  blink_once();
+  blink_once_blue();
 
   for (int i = 0; i < 5; i++){
-    blink_once();
+    blink_once_blue();
     Serial.println("Connecting to MQTT server [" + String(i) + "/5]...");
     if (!mqttClient.connected()) {
       if (mqttClient.connect(client_id, mqtt_username, mqtt_pw)) {
         Serial.println("MQTT connected!");
-        blink_success();
+        mqttClient.subscribe(TP_LED);
+        Serial.println("Subscribed to topic: " + String(TP_LED));
         break;
       } else {
         Serial.print("failed, rc=");
@@ -108,6 +125,15 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   incomingMessage.trim();
   Serial.println("Message received from MQTT server: " + incomingMessage);
+  if (incomingMessage == "1"){
+    setColor(255, 0, 0);
+  } else if (incomingMessage == "2"){
+    setColor(0, 255, 0);
+  } else if (incomingMessage == "3"){
+    setColor(0, 0, 255);
+  } else {
+    setColor(0, 0, 0);
+  }
 }
 
 void publish_message(const char* topic, String payload){
@@ -116,7 +142,7 @@ void publish_message(const char* topic, String payload){
   }
   mqttClient.publish(topic, payload.c_str(), true);
   Serial.println("Message published to MQTT server: " + payload);
-  blink_data_send();
+  //blink_data_send();
 }
 
 void setup_IMU(){
@@ -127,7 +153,7 @@ void setup_IMU(){
     blink_error();
   }
   Serial.println("IMU initialized!");
-  blink_once();
+  blink_once_blue();
 }
 
 void printWifiData() {
@@ -185,7 +211,7 @@ void setup_Serial(){
   //while (!Serial) {
   //  ; // wait for serial port to connect. Needed for native USB port only
   //}
-  blink_once();
+  blink_once_blue();
 }
 
 void setup_wifi_connection(){
@@ -195,13 +221,13 @@ void setup_wifi_connection(){
     // don't continue
     blink_error();
   }
-  blink_once();
+  blink_once_blue();
 
   String fv = WiFi.firmwareVersion();
   if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
     Serial.println("Please upgrade the firmware");
   }
-  blink_once();
+  blink_once_blue();
 
   // attempt to connect to Wifi network:
   int attempts = 0;
@@ -226,43 +252,39 @@ void setup_wifi_connection(){
   printCurrentNet();
   printWifiData();
 
-  blink_success();
-  delay(2000);
+  // Give the hardware a breather
+  delay(1000);
 }
 
 void blink_error(){
   while(true){
-    digitalWrite(led_out, HIGH);
+    setColor(255, 0, 0);
     delay(100);
-    digitalWrite(led_out, LOW);
+    setColor(0, 0, 0);
     delay(100);
   }
 }
 
-void blink_once(){
-  digitalWrite(led_out, HIGH);
+void blink_once_blue(){
+  setColor(0, 0, 255);
   delay(100);
-  digitalWrite(led_out, LOW);
+  setColor(0, 0, 0);
   delay(100);
 }
 
 void blink_data_send(){
-  digitalWrite(led_out, HIGH);
+  setColor(0, 255, 0);
   delay(40);
-  digitalWrite(led_out, LOW);
+  setColor(0, 0, 0);
 }
 
 void blink_connection(int time_sec){
   for (int i = 0; i < time_sec; i++){
-    digitalWrite(led_out, HIGH);
+    setColor(0, 0, 255);
     delay(500);
-    digitalWrite(led_out, LOW);
+    setColor(0, 0, 0);
     delay(500);
   }
-}
-
-void blink_success(){
-  digitalWrite(led_out, HIGH);
 }
 
 void print_temp_serial(int temp){
@@ -278,4 +300,10 @@ int get_temperature(){
     IMU.readTemperature(temperature_deg);
   }
   return temperature_deg;
+}
+
+void setColor(int R, int G, int B) {
+  analogWrite(PIN_RED_LED, 255 - R);
+  analogWrite(PIN_GREEN_LED, 255 - G);
+  analogWrite(PIN_BLUE_LED, 255 - B);
 }
