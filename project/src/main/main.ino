@@ -8,6 +8,8 @@
  * Includes
  ******************************************************************************/
 #include <WiFiNINA.h>
+#include <Arduino_LSM6DSOX.h>
+
 #include "lib\credentials.h"
 
 /*******************************************************************************
@@ -26,6 +28,9 @@ void setup() {
 
   // Initialize serial communication
   init_serial();
+
+  // Initialize IMU sensor
+  init_IMU();
 }
 
 /*******************************************************************************
@@ -64,10 +69,25 @@ void init_LED() {
 */
 void init_serial() {
   Serial.begin(9600);
+  blink_x_times(3, 0, 0, 255);
   // wait for 2 seconds for serial port to connect
   delay(2000);
   Serial.println("Serial initialized");
+}
+
+/**
+ * @brief   Initializes IMU sensor and print status to serial
+*/
+void init_IMU(){
+  // Initialize LSM6DSOX library's
+  Serial.println("Initializing IMU...");
+  if (!IMU.begin()) {
+    Serial.println("Failed to initialize IMU!");
+    error_state();
+  }
+  Serial.println("IMU initialized!");
   blink_x_times(3, 0, 0, 255);
+  print_temp_serial(get_temperature());
 }
 
 /*******************************************************************************
@@ -101,4 +121,50 @@ void setColor(int R, int G, int B) {
   analogWrite(PIN_RED_LED, 255 - R);
   analogWrite(PIN_GREEN_LED, 255 - G);
   analogWrite(PIN_BLUE_LED, 255 - B);
+}
+
+/*******************************************************************************
+ * Error Functions
+ ******************************************************************************/
+
+/**
+ * @brief   Blinks the internal LED in red to indicate an error
+ * @note    Blocking function (infinite loop)
+ * @note    Use only for critical non recoverable errors
+*/
+void error_state(){
+  while(true){
+    setColor(255, 0, 0);
+    delay(500);
+    setColor(0, 0, 0);
+    delay(500);
+  }
+}
+
+/*******************************************************************************
+ * IMU Functions
+ ******************************************************************************/
+
+/**
+ * @brief  Gets the temperature from the IMU
+ * @return Temperature in °C or -273 if not available
+*/
+int get_temperature(){
+  int temperature_deg = 0;
+  if (IMU.temperatureAvailable())
+  {
+    IMU.readTemperature(temperature_deg);
+    return temperature_deg;
+  } else {
+    return -273;
+  }
+}
+
+/**
+ * @brief   Prints the temperature to the serial
+*/
+void print_temp_serial(int temp){
+  Serial.print("LSM6DSOX Temperature = ");
+  Serial.print(temp);
+  Serial.println(" °C");
 }
