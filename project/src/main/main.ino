@@ -24,6 +24,8 @@ const int PIN_BLUE_LED    = 4;              /**< GPIO pin for blue LED */
 const int PIN_DOOR_MAIN   = 5;              /**< GPIO pin for main door sensor */
 const int PIN_DOOR_LETTER = 6;              /**< GPIO pin for letter box door sensor */
 
+const int PIN_DOOR_LOCK   = 7;              /**< GPIO pin for door lock */
+
 /* WIFI Connection Details */
 #define MAX_WIFI_CONNECTION_ATTEMPTS 5      /**< Attempts to connect to WiFi */
 const char ssid[]   = WIFI_SSID;            /**< network SSID (name) */
@@ -150,6 +152,10 @@ void init_IMU(){
   print_temp_serial(get_temperature());
 }
 
+/**
+ * @brief   Initializes the door sensors
+ * @note    One sensor for the main door and one for the letter box
+*/
 void init_DoorSensors(){
   // Initialize door sensors
   pinMode(PIN_DOOR_MAIN, INPUT_PULLUP);
@@ -164,6 +170,10 @@ void init_DoorSensors(){
 
   // Show door status
   show_door_status();
+}
+
+void init_door_lock(){
+  pinMode(PIN_DOOR_LOCK, OUTPUT);
 }
 
 
@@ -228,6 +238,8 @@ void init_MQTT(){
         Serial.println("MQTT connected!");
         mqttClient.subscribe(TP_LED);
         Serial.println("Subscribed to topic: " + String(TP_LED));
+        mqttClient.subscribe(TP_DOOR_OPEN);
+        Serial.println("Subscribed to topic: " + String(TP_DOOR_OPEN));
         break;
       } else {
         Serial.print("failed, rc=");
@@ -266,6 +278,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
     setColor(0, 255, 0);
   } else if (incomingMessage == "3"){
     setColor(0, 0, 255);
+  } else if (incomingMessage == "OPEN"){
+    unlock_door();
   } else {
     setColor(0, 0, 0);
   }
@@ -373,6 +387,28 @@ void show_door_status(){
   } else {
     setColor(0, 0, 0);
   }
+}
+
+/*******************************************************************************
+ * Lock Functions
+ ******************************************************************************/
+
+void unlock_door(){
+  // Unlock door
+  digitalWrite(PIN_DOOR_LOCK, HIGH);
+  Serial.println("Door unlocked!");
+
+  // Wait 5 seconds for user to open the door
+  int counter = 0;
+  while (!door_main_open && counter < 50){
+    update_door_main_status();
+    delay(100);
+    counter++;
+  }
+
+  // Lock door
+  digitalWrite(PIN_DOOR_LOCK, LOW);
+  Serial.println("Door locked!");
 }
 
 
