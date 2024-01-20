@@ -1,7 +1,14 @@
 /**
- * @file    main.ino
- * @brief   Main file for the project
- * @author  Smokey95
+ * @file      main.ino
+ * @brief     Main file for the project
+ * @author    Smokey95
+ * @authors   This script contains code published from Adafruit Industries by:
+ *            Limor Fried/Ladyada
+ * @note      Adafruit invests time and resources providing open source code,
+              please support Adafruit and open-source hardware by purchasing
+              products from Adafruit!
+ * @copyright This code is licensed under the MIT License while the Adafruit
+              fingerprint library is licensed under the BSD License
 */
 
 /*******************************************************************************
@@ -10,6 +17,7 @@
 #include <WiFiNINA.h>
 #include <Arduino_LSM6DSOX.h>
 #include <PubSubClient.h>
+#include <Adafruit_Fingerprint.h>
 
 #include "lib\credentials.h"
 #include "lib\topics.h"
@@ -30,7 +38,9 @@ const int PIN_DOOR_LOCK   = 7;              /**< GPIO pin for door lock */
 #define MAX_WIFI_CONNECTION_ATTEMPTS 5      /**< Attempts to connect to WiFi */
 const char ssid[]   = WIFI_SSID;            /**< network SSID (name) */
 const char pass[]   = WIFI_PASS;            /**< network password */
-int status          = WL_IDLE_STATUS;       /**< WiFi radio's status */
+
+/* Finger Print Sensor */
+#define mySerial Serial1                    /**< Hardware serial port */
 
 /* MQTT Connection Details */
 const char* mqtt_server   = MQTT_SERVER;    /**< MQTT server address */
@@ -45,8 +55,13 @@ const int   mqtt_port     = MQTT_PORT;      /**< MQTT port */
  ******************************************************************************/
 
 /* WiFi Client Defintion */
+int status          = WL_IDLE_STATUS;       /**< WiFi radio's status */
 WiFiSSLClient wifiClient;
 PubSubClient mqttClient(wifiClient);
+
+/* Finger Print Sensor */
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); /**< Finger print sensor */
+uint8_t finger_id = 0;                        /**< Finger print ID */
 
 /* Door Status */
 bool door_main_open = false;                /**< Status of main door */
@@ -78,6 +93,17 @@ void setup() {
 
   // Initialize door sensors
   init_DoorSensors();
+
+  // Initialize door lock
+  init_door_lock();
+
+  // Initialize finger print sensor
+  init_finger_print_sensor();
+
+  // Show that setup is finished
+  setColor(0, 255, 0);
+  delay(3000);
+  setColor(0, 0, 0);
 }
 
 /*******************************************************************************
@@ -86,7 +112,7 @@ void setup() {
 
 void loop() {
 
-  static int loop_counter = 10;
+  static int loop_counter = 100;
 
   mqttClient.loop();
 
@@ -240,6 +266,8 @@ void init_MQTT(){
         Serial.println("Subscribed to topic: " + String(TP_LED));
         mqttClient.subscribe(TP_DOOR_OPEN);
         Serial.println("Subscribed to topic: " + String(TP_DOOR_OPEN));
+        mqttClient.subscribe(TP_FINGER_SCAN);
+        Serial.println("Subscribed to topic: " + String(TP_FINGER_SCAN));
         break;
       } else {
         Serial.print("failed, rc=");
@@ -253,6 +281,26 @@ void init_MQTT(){
 
   if (!mqttClient.connected()) {
     Serial.println("MQTT connection failed!");
+    error_state();
+  }
+}
+
+/**
+ * @brief   Initializes the finger print sensor
+ * @author  Limor Fried/Ladyada for Adafruit Industries.
+*/
+void init_finger_print_sensor(){
+  // set the data rate for the sensor serial port
+  Serial.println("Initializing finger print sensor...");
+  finger.begin(57600);
+  delay(5);
+  if (finger.verifyPassword()) {
+    Serial.println("Found fingerprint sensor!");
+    finger.LEDcontrol(false);
+  } else {
+    Serial.println("Did not find fingerprint sensor!");
+    Serial.println("Restart system and try again!");
+    Serial.println("If problem persists, contact support :)");
     error_state();
   }
 }
@@ -280,6 +328,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
     setColor(0, 0, 255);
   } else if (incomingMessage == "OPEN"){
     unlock_door();
+  } else if (incomingMessage == "SCAN"){
+    finger_id = scan_finger();
+    if (finger_id == 1){
+      Serial.println("Finger print detected!");
+      unlock_door();
+    } else {
+      Serial.println("Finger print not detected!");
+    }
   } else {
     setColor(0, 0, 0);
   }
@@ -518,4 +574,144 @@ void printMacAddress(byte mac[]) {
     }
   }
   Serial.println();
+}
+
+/*******************************************************************************
+ * Finger Print Sensor Functions
+ ******************************************************************************/
+
+/**
+ * @brief   Prints the finger print sensor info to the serial
+ * @note    Blocking function (infinite loop)
+ * @author  Limor Fried/Ladyada for Adafruit Industries.
+*/
+void print_FingerPrint_Sensor_Info(){
+  Serial.println(F("Reading sensor parameters"));
+  finger.getParameters();
+  Serial.print(F("Status: 0x")); Serial.println(finger.status_reg, HEX);
+  Serial.print(F("Sys ID: 0x")); Serial.println(finger.system_id, HEX);
+  Serial.print(F("Capacity: ")); Serial.println(finger.capacity);
+  Serial.print(F("Security level: ")); Serial.println(finger.security_level);
+  Serial.print(F("Device address: ")); Serial.println(finger.device_addr, HEX);
+  Serial.print(F("Packet len: ")); Serial.println(finger.packet_len);
+  Serial.print(F("Baud rate: ")); Serial.println(finger.baud_rate);
+
+  finger.getTemplateCount();
+
+  if (finger.templateCount == 0) {
+    Serial.print("Sensor doesn't contain any fingerprint data. Please contact support :)");
+  }
+  else {
+    Serial.println("Waiting for valid finger...");
+    Serial.print("Sensor contains "); 
+    Serial.print(finger.templateCount); 
+    Serial.println(" templates");
+  }
+}
+
+/**
+ * @brief   Gets the finger print ID from the sensor
+ * @return  Finger print ID or -1 if no finger print was found
+ * @author  Fried/Ladyada for Adafruit Industries.
+*/
+uint8_t getFingerprintID() {
+  uint8_t p = finger.getImage();
+  switch (p) {
+    case FINGERPRINT_OK:
+      Serial.println("Image taken");
+      break;
+    case FINGERPRINT_NOFINGER:
+      Serial.println("No finger detected");
+      return p;
+    case FINGERPRINT_PACKETRECIEVEERR:
+      Serial.println("Communication error");
+      return p;
+    case FINGERPRINT_IMAGEFAIL:
+      Serial.println("Imaging error");
+      return p;
+    default:
+      Serial.println("Unknown error");
+      return p;
+  }
+
+  // OK success!
+
+  p = finger.image2Tz();
+  switch (p) {
+    case FINGERPRINT_OK:
+      Serial.println("Image converted");
+      break;
+    case FINGERPRINT_IMAGEMESS:
+      Serial.println("Image too messy");
+      return p;
+    case FINGERPRINT_PACKETRECIEVEERR:
+      Serial.println("Communication error");
+      return p;
+    case FINGERPRINT_FEATUREFAIL:
+      Serial.println("Could not find fingerprint features");
+      return p;
+    case FINGERPRINT_INVALIDIMAGE:
+      Serial.println("Could not find fingerprint features");
+      return p;
+    default:
+      Serial.println("Unknown error");
+      return p;
+  }
+
+  // OK converted!
+  p = finger.fingerSearch();
+  if (p == FINGERPRINT_OK) {
+    Serial.println("Found a print match!");
+  } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
+    Serial.println("Communication error");
+    return p;
+  } else if (p == FINGERPRINT_NOTFOUND) {
+    Serial.println("Did not find a match");
+    return p;
+  } else {
+    Serial.println("Unknown error");
+    return p;
+  }
+
+  // found a match!
+  Serial.print("Found ID #"); Serial.print(finger.fingerID);
+  Serial.print(" with confidence of "); Serial.println(finger.confidence);
+
+  return finger.fingerID;
+}
+
+/**
+ * @brief   Gets the finger print ID from the sensor
+ * @return  Finger print ID or -1 if no finger print was found
+ * @author  Limor Fried/Ladyada for Adafruit Industries.
+*/
+int getFingerprintIDez() {
+  uint8_t p = finger.getImage();
+  if (p != FINGERPRINT_OK)  return -1;
+
+  p = finger.image2Tz();
+  if (p != FINGERPRINT_OK)  return -1;
+
+  p = finger.fingerFastSearch();
+  if (p != FINGERPRINT_OK)  return -1;
+
+  // found a match!
+  Serial.print("Found ID #"); Serial.print(finger.fingerID);
+  Serial.print(" with confidence of "); Serial.println(finger.confidence);
+  return finger.fingerID;
+}
+
+uint8_t scan_finger(){
+  finger.LEDcontrol(true);
+  delay(500);
+  while(true){
+    int id = getFingerprintIDez();
+    if (id != -1){
+      Serial.print("Finger print detected! ID: ");
+      Serial.println(id);
+      finger.LEDcontrol(false);
+      return id;
+    }
+    delay(50);
+  }
 }

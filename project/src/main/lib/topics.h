@@ -4,3 +4,4 @@
 #define TP_DOOR_MAIN      "letterbox_door_main"
 #define TP_DOOR_LETTER    "letterbox_door_letter"
 #define TP_DOOR_OPEN      "letterbox_door_open"
+#define TP_FINGER_SCAN    "letterbox_finger_scan"
