@@ -71,6 +71,8 @@ bool door_main_prev = false;                /**< Previous status of main door */
 bool door_letter_open = false;              /**< Status of letter box door */
 bool door_letter_prev = false;              /**< Previous status of letter box door */
 
+uint8_t mail_count = 0;                     /**< Number of mails in letter box */
+
 /*******************************************************************************
  * Setup
  ******************************************************************************/
@@ -380,6 +382,10 @@ void send_letter_door_status(){
   publish_message(TP_DOOR_LETTER, String(door_letter_open));
 }
 
+void send_mail_count(){
+  publish_message(TP_MAIL_COUNT, String(mail_count));
+}
+
 void send_temp(){
   publish_message(TP_TEMP, String(get_temperature()));
 }
@@ -432,6 +438,8 @@ void update_door_main_status(){
       Serial.println("Main door opened!");
     } else {
       Serial.println("Main door closed!");
+      mail_count = 0;
+      send_mail_count();
     }
   }
 }
@@ -443,6 +451,8 @@ void update_door_letter_status(){
     send_letter_door_status();
     if (door_letter_open){
       Serial.println("Letter box door opened!");
+      mail_count++;
+      send_mail_count();
     } else {
       Serial.println("Letter box door closed!");
     }
@@ -719,7 +729,16 @@ int getFingerprintIDez() {
 uint8_t scan_finger(){
   finger.LEDcontrol(true);
   delay(500);
+  int i = 0;
   while(true){
+    
+    if (i > 10){
+      Serial.println("Finger print not detected!");
+      finger.LEDcontrol(false);
+      blink_x_times(3, 255, 0, 0, 1000);
+      return 256;
+    }
+
     int id = getFingerprintIDez();
     if (id != -1){
       Serial.print("Finger print detected! ID: ");
@@ -727,6 +746,7 @@ uint8_t scan_finger(){
       finger.LEDcontrol(false);
       return id;
     }
+    i++;
     delay(50);
   }
 }

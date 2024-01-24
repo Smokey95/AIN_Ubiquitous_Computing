@@ -6,3 +6,4 @@
 #define TP_DOOR_OPEN      "letterbox_door_open"
 #define TP_FINGER_SCAN    "letterbox_finger_scan"
 #define TP_TEMP           "letterbox_temp"
+#define TP_MAIL_COUNT     "letterbox_mail_count"
