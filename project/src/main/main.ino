@@ -114,7 +114,7 @@ void setup() {
 
 void loop() {
 
-  static int loop_counter = 100;
+  static int loop_counter = 200;
 
   mqttClient.loop();
 
@@ -129,8 +129,14 @@ void loop() {
     }
   }
 
+  // Send alive every 10 seconds
   if (loop_counter % 100 == 0){
     send_alive();
+  }
+
+  // Send temp every 20 seconds
+  if (loop_counter % 200 == 0){
+    send_temp();
     loop_counter = 0;
   }
 
@@ -372,6 +378,10 @@ void send_main_door_status(){
 
 void send_letter_door_status(){
   publish_message(TP_DOOR_LETTER, String(door_letter_open));
+}
+
+void send_temp(){
+  publish_message(TP_TEMP, String(get_temperature()));
 }
 
 /*******************************************************************************
