@@ -34,6 +34,8 @@ const int PIN_DOOR_LETTER = 6;              /**< GPIO pin for letter box door se
 
 const int PIN_DOOR_LOCK   = 7;              /**< GPIO pin for door lock */
 
+const int PIN_FINGER_REQ  = 8;              /**< GPIO pin for finger print sensor request */
+
 /* WIFI Connection Details */
 #define MAX_WIFI_CONNECTION_ATTEMPTS 5      /**< Attempts to connect to WiFi */
 const char ssid[]   = WIFI_SSID;            /**< network SSID (name) */
@@ -120,6 +122,13 @@ void loop() {
   update_door_main_status();
   update_door_letter_status();
 
+  // Check for finger print
+  if (get_finger_print_trigger()){
+    if (verify_finger()){
+      unlock_door();
+    }
+  }
+
   if (loop_counter % 100 == 0){
     send_alive();
     loop_counter = 0;
@@ -193,9 +202,6 @@ void init_DoorSensors(){
 
   // Print door status
   print_door_status();
-
-  // Show door status
-  show_door_status();
 }
 
 void init_door_lock(){
@@ -297,6 +303,8 @@ void init_finger_print_sensor(){
   if (finger.verifyPassword()) {
     Serial.println("Found fingerprint sensor!");
     finger.LEDcontrol(false);
+    // Init finger print hardware trigger too
+    pinMode(PIN_FINGER_REQ, INPUT_PULLDOWN);
   } else {
     Serial.println("Did not find fingerprint sensor!");
     Serial.println("Restart system and try again!");
@@ -305,6 +313,9 @@ void init_finger_print_sensor(){
   }
 }
 
+bool get_finger_print_trigger(){
+  return digitalRead(PIN_FINGER_REQ);
+}
 /*******************************************************************************
  * MQTT Functions
  ******************************************************************************/
@@ -329,12 +340,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
   } else if (incomingMessage == "OPEN"){
     unlock_door();
   } else if (incomingMessage == "SCAN"){
-    finger_id = scan_finger();
-    if (finger_id == 1){
-      Serial.println("Finger print detected!");
+    if (verify_finger()){
       unlock_door();
-    } else {
-      Serial.println("Finger print not detected!");
     }
   } else {
     setColor(0, 0, 0);
@@ -409,9 +416,9 @@ void update_door_main_status(){
   door_main_open = digitalRead(PIN_DOOR_MAIN);
   if (door_main_open != door_main_prev){
     door_main_prev = door_main_open;
-    show_door_status();
     send_main_door_status();
     if (door_main_open){
+      setColor(0, 0, 0);
       Serial.println("Main door opened!");
     } else {
       Serial.println("Main door closed!");
@@ -437,14 +444,6 @@ void print_door_status(){
   Serial.println("Letter box door open: " + String(door_letter_open));
 }
 
-void show_door_status(){
-  if (door_main_open){
-    setColor(0, 255, 0);
-  } else {
-    setColor(0, 0, 0);
-  }
-}
-
 /*******************************************************************************
  * Lock Functions
  ******************************************************************************/
@@ -453,6 +452,9 @@ void unlock_door(){
   // Unlock door
   digitalWrite(PIN_DOOR_LOCK, HIGH);
   Serial.println("Door unlocked!");
+
+  // Show that door is unlocked
+  setColor(0, 255, 0);
 
   // Wait 5 seconds for user to open the door
   int counter = 0;
@@ -465,6 +467,9 @@ void unlock_door(){
   // Lock door
   digitalWrite(PIN_DOOR_LOCK, LOW);
   Serial.println("Door locked!");
+
+  // Show that door is locked
+  setColor(0, 0, 0);
 }
 
 
@@ -713,5 +718,16 @@ uint8_t scan_finger(){
       return id;
     }
     delay(50);
+  }
+}
+
+bool verify_finger(){
+  finger_id = scan_finger();
+  if (finger_id == 1 || finger_id == 2){
+    Serial.println("Finger print detected!");
+    return true;
+  } else {
+    Serial.println("Finger print not detected!");
+    return false;
   }
 }
