@@ -356,6 +356,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
 }
 
+/**
+ * @brief   Publishes a message to the MQTT server
+*/
 void publish_message(const char* topic, String payload){
   if (!mqttClient.connected()) {
     Serial.print("MQTT connection lost! ");
@@ -367,9 +370,6 @@ void publish_message(const char* topic, String payload){
   Serial.println("Message published to MQTT server: " + payload);
 }
 
-/**
- * @brief   Send an alive message to the MQTT server
-*/
 void send_alive(){
   publish_message(TP_ALIVE, "true");
 }
@@ -428,6 +428,9 @@ void setColor(int R, int G, int B) {
  * Door Functions
  ******************************************************************************/
 
+/**
+ * @brief   Updates the status of the main door
+ */
 void update_door_main_status(){
   door_main_open = digitalRead(PIN_DOOR_MAIN);
   if (door_main_open != door_main_prev){
@@ -444,6 +447,9 @@ void update_door_main_status(){
   }
 }
 
+/**
+ * @brief   Updates the status of the letter box door
+*/
 void update_door_letter_status(){
   door_letter_open = digitalRead(PIN_DOOR_LETTER);
   if (door_letter_open != door_letter_prev){
@@ -468,6 +474,11 @@ void print_door_status(){
  * Lock Functions
  ******************************************************************************/
 
+/**
+ * @brief   Unlocks the door
+ * @note    Blocking function (5 seconds)
+ * @note    Door is locked again after 5 seconds
+ */
 void unlock_door(){
   // Unlock door
   digitalWrite(PIN_DOOR_LOCK, HIGH);
@@ -478,7 +489,7 @@ void unlock_door(){
 
   // Wait 5 seconds for user to open the door
   int counter = 0;
-  while (!door_main_open && counter < 50){
+  while (counter < 50){
     update_door_main_status();
     delay(100);
     counter++;
@@ -726,6 +737,10 @@ int getFingerprintIDez() {
   return finger.fingerID;
 }
 
+/**
+ * @brief   Scans for a finger print
+ * @return  Finger print ID or 256 if no finger print was found
+*/
 uint8_t scan_finger(){
   finger.LEDcontrol(true);
   delay(500);
@@ -751,6 +766,10 @@ uint8_t scan_finger(){
   }
 }
 
+/**
+ * @brief   Verifies if a finger print is detected
+ * @return  True if finger print is detected, false otherwise
+*/
 bool verify_finger(){
   finger_id = scan_finger();
   if (finger_id == 1 || finger_id == 2){

@@ -1,0 +1,1531 @@
+[
+    {
+        "id": "d968260766f6179a",
+        "type": "tab",
+        "label": "IoT_Letter_Box",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3076efc11f5b7839",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Watch Dog",
+        "style": {
+            "fill": "#d1d1d1",
+            "label": true,
+            "color": "#000000",
+            "fill-opacity": "0.5"
+        },
+        "nodes": [
+            "50c4c4e97c4c830f",
+            "14de4ef467d1506c",
+            "2a20374a22784640",
+            "2170980bea43fe43",
+            "48d1a084f78e7071"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 1172,
+        "h": 242
+    },
+    {
+        "id": "24f23bd6e70703e2",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "LED Control",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "aebebb6c67d65625",
+            "a937da7395a73e28",
+            "9ad556e11742c1f4",
+            "47b9e2a7ec96dd9b",
+            "2cbce2c855e060ae",
+            "d1f2983bd6f28e11",
+            "ad99fbd428fae369",
+            "2e8d384d826de07d",
+            "3bd8ab9a4093aec7",
+            "6fc417d0873212c8"
+        ],
+        "x": 34,
+        "y": 299,
+        "w": 1172,
+        "h": 362
+    },
+    {
+        "id": "f3fb74f7132955ec",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Main Door",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "ccc3e73c4a16977f",
+            "e34ef703a46f6ef2",
+            "c66accf2ec8ba84d"
+        ],
+        "x": 34,
+        "y": 699,
+        "w": 1172,
+        "h": 142
+    },
+    {
+        "id": "8fbd0bd5a181135b",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Letter Door",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "5b1d92c359221b4d",
+            "8847d38423bcfcdd",
+            "8fffaee49780635b"
+        ],
+        "x": 34,
+        "y": 879,
+        "w": 1172,
+        "h": 142
+    },
+    {
+        "id": "d73fc47b19eda571",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Door Locker",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "13db735bdb8f7d1f",
+            "35147d24061f68f8",
+            "47046b06cf8d3ebf",
+            "d25b1d341ca10cf8"
+        ],
+        "x": 34,
+        "y": 1059,
+        "w": 1172,
+        "h": 142
+    },
+    {
+        "id": "ad78e64c6b5f41bf",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Finger Scanning",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "354ab3e9f39d8ea4",
+            "42133232d48ac217",
+            "edab9f82329aecbc",
+            "cb57140af89b694d"
+        ],
+        "x": 34,
+        "y": 1239,
+        "w": 1172,
+        "h": 142
+    },
+    {
+        "id": "1f315ff865ac1469",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Environment data",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "d9b27efbe7aab293",
+            "d66d30cb85938de7",
+            "1a99ff3b120d2f3c",
+            "6c1244f5ace87787",
+            "27688faa061af982",
+            "fdeb94aae184c71d",
+            "0c92177ee54ff40b"
+        ],
+        "x": 34,
+        "y": 1419,
+        "w": 1172,
+        "h": 322
+    },
+    {
+        "id": "39a03ce5f693386d",
+        "type": "group",
+        "z": "d968260766f6179a",
+        "name": "Email Settings",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "d838b528bb19bae4",
+            "6f7d917bee6b6f03",
+            "af4c7380467599ee",
+            "9b2c021bcd78ee5f",
+            "cd517f3afb274ef7",
+            "33e02e5e87f8d003",
+            "e89908726a4ba958",
+            "f77dadef483063c8"
+        ],
+        "x": 34,
+        "y": 1779,
+        "w": 1172,
+        "h": 362
+    },
+    {
+        "id": "50c4c4e97c4c830f",
+        "type": "mqtt in",
+        "z": "d968260766f6179a",
+        "g": "3076efc11f5b7839",
+        "name": "",
+        "topic": "letterbox_alive",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6d24ee5bc061f8cf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 60,
+        "wires": [
+            [
+                "2a20374a22784640",
+                "14de4ef467d1506c",
+                "48d1a084f78e7071"
+            ]
+        ]
+    },
+    {
+        "id": "14de4ef467d1506c",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "3076efc11f5b7839",
+        "name": "mqtt: letterbox alive",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "aebebb6c67d65625",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "LED RED",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "a937da7395a73e28",
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "a937da7395a73e28",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "mqtt: led color",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "9ad556e11742c1f4",
+        "type": "mqtt out",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "",
+        "topic": "letterbox_led",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6d24ee5bc061f8cf",
+        "x": 1090,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "47b9e2a7ec96dd9b",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "LED GREEN",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2",
+        "payloadType": "num",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "a937da7395a73e28",
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "2cbce2c855e060ae",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "LED BLUE",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "3",
+        "payloadType": "num",
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "a937da7395a73e28",
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "d1f2983bd6f28e11",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "LED OFF",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 160,
+        "y": 580,
+        "wires": [
+            [
+                "a937da7395a73e28",
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "ccc3e73c4a16977f",
+        "type": "mqtt in",
+        "z": "d968260766f6179a",
+        "g": "f3fb74f7132955ec",
+        "name": "",
+        "topic": "letterbox_door_main",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6d24ee5bc061f8cf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 740,
+        "wires": [
+            [
+                "e34ef703a46f6ef2",
+                "c66accf2ec8ba84d"
+            ]
+        ]
+    },
+    {
+        "id": "e34ef703a46f6ef2",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "f3fb74f7132955ec",
+        "name": "mqtt: letterbox main door status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "5b1d92c359221b4d",
+        "type": "mqtt in",
+        "z": "d968260766f6179a",
+        "g": "8fbd0bd5a181135b",
+        "name": "",
+        "topic": "letterbox_door_letter",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6d24ee5bc061f8cf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 920,
+        "wires": [
+            [
+                "8847d38423bcfcdd",
+                "8fffaee49780635b"
+            ]
+        ]
+    },
+    {
+        "id": "8847d38423bcfcdd",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "8fbd0bd5a181135b",
+        "name": "mqtt: letterbox letter door status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "13db735bdb8f7d1f",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "d73fc47b19eda571",
+        "name": "UNLOCK DOOR",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "OPEN",
+        "payloadType": "str",
+        "x": 160,
+        "y": 1100,
+        "wires": [
+            [
+                "35147d24061f68f8",
+                "47046b06cf8d3ebf"
+            ]
+        ]
+    },
+    {
+        "id": "35147d24061f68f8",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "d73fc47b19eda571",
+        "name": "mqtt: door command",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "47046b06cf8d3ebf",
+        "type": "mqtt out",
+        "z": "d968260766f6179a",
+        "g": "d73fc47b19eda571",
+        "name": "",
+        "topic": "letterbox_door_open",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6d24ee5bc061f8cf",
+        "x": 1060,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "354ab3e9f39d8ea4",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "ad78e64c6b5f41bf",
+        "name": "SCAN FINGER",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "SCAN",
+        "payloadType": "str",
+        "x": 160,
+        "y": 1280,
+        "wires": [
+            [
+                "42133232d48ac217",
+                "edab9f82329aecbc"
+            ]
+        ]
+    },
+    {
+        "id": "42133232d48ac217",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "ad78e64c6b5f41bf",
+        "name": "mqtt: finger print command",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "edab9f82329aecbc",
+        "type": "mqtt out",
+        "z": "d968260766f6179a",
+        "g": "ad78e64c6b5f41bf",
+        "name": "",
+        "topic": "letterbox_finger_scan",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6d24ee5bc061f8cf",
+        "x": 1020,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "2a20374a22784640",
+        "type": "trigger",
+        "z": "d968260766f6179a",
+        "g": "3076efc11f5b7839",
+        "name": "",
+        "op1": "",
+        "op2": "false",
+        "op1type": "nul",
+        "op2type": "bool",
+        "duration": "15",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "14de4ef467d1506c",
+                "48d1a084f78e7071"
+            ]
+        ]
+    },
+    {
+        "id": "2170980bea43fe43",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "3076efc11f5b7839",
+        "name": "<debug> false",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "2a20374a22784640",
+                "48d1a084f78e7071"
+            ]
+        ]
+    },
+    {
+        "id": "48d1a084f78e7071",
+        "type": "ui_led",
+        "z": "d968260766f6179a",
+        "g": "3076efc11f5b7839",
+        "order": 1,
+        "group": "9d3babfa6f091dfa",
+        "width": 0,
+        "height": 0,
+        "label": "System online:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff9326",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Watch Dog",
+        "x": 1110,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c66accf2ec8ba84d",
+        "type": "ui_led",
+        "z": "d968260766f6179a",
+        "g": "f3fb74f7132955ec",
+        "order": 2,
+        "group": "9d3babfa6f091dfa",
+        "width": 0,
+        "height": 0,
+        "label": "Main Door open:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff9326",
+                "value": "0",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Main Door LED",
+        "x": 980,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "8fffaee49780635b",
+        "type": "ui_led",
+        "z": "d968260766f6179a",
+        "g": "8fbd0bd5a181135b",
+        "order": 3,
+        "group": "9d3babfa6f091dfa",
+        "width": 0,
+        "height": 0,
+        "label": "Letter Door open:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff9326",
+                "value": "0",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Letter Door LED",
+        "x": 980,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d25b1d341ca10cf8",
+        "type": "ui_button",
+        "z": "d968260766f6179a",
+        "g": "d73fc47b19eda571",
+        "name": "",
+        "group": "95d2a545f5812884",
+        "order": 2,
+        "width": 8,
+        "height": 1,
+        "passthru": false,
+        "label": "Unlock Door",
+        "tooltip": "unlock mailboxes main door",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "mi-lock_open",
+        "payload": "OPEN",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 170,
+        "y": 1160,
+        "wires": [
+            [
+                "47046b06cf8d3ebf"
+            ]
+        ]
+    },
+    {
+        "id": "cb57140af89b694d",
+        "type": "ui_button",
+        "z": "d968260766f6179a",
+        "g": "ad78e64c6b5f41bf",
+        "name": "",
+        "group": "95d2a545f5812884",
+        "order": 6,
+        "width": 8,
+        "height": 1,
+        "passthru": false,
+        "label": "Unlock using Finger",
+        "tooltip": "Activate finger detection",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-hand-o-up",
+        "payload": "SCAN",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 160,
+        "y": 1340,
+        "wires": [
+            [
+                "edab9f82329aecbc"
+            ]
+        ]
+    },
+    {
+        "id": "d9b27efbe7aab293",
+        "type": "mqtt in",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "name": "",
+        "topic": "letterbox_temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6d24ee5bc061f8cf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1460,
+        "wires": [
+            [
+                "d66d30cb85938de7",
+                "1a99ff3b120d2f3c",
+                "6c1244f5ace87787"
+            ]
+        ]
+    },
+    {
+        "id": "d66d30cb85938de7",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "name": "mqtt: temperatur",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "1a99ff3b120d2f3c",
+        "type": "ui_chart",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "name": "",
+        "group": "ad18e82c8d4fe368",
+        "order": 2,
+        "width": 7,
+        "height": 5,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff8000",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1090,
+        "y": 1580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fdeb94aae184c71d",
+        "type": "ui_digital_clock",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "name": "Clock",
+        "group": "ad18e82c8d4fe368",
+        "order": 1,
+        "width": 12,
+        "height": 5,
+        "x": 1090,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "0c92177ee54ff40b",
+        "type": "inject",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "name": "timestamp",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 1700,
+        "wires": [
+            [
+                "fdeb94aae184c71d"
+            ]
+        ]
+    },
+    {
+        "id": "6c1244f5ace87787",
+        "type": "ui_artlessgauge",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "group": "ad18e82c8d4fe368",
+        "order": 3,
+        "width": 5,
+        "height": 5,
+        "name": "",
+        "icon": "",
+        "label": "Temperature",
+        "unit": "",
+        "layout": "radial",
+        "decimals": 0,
+        "differential": false,
+        "minmax": false,
+        "colorTrack": "#ff8000",
+        "style": "",
+        "colorFromTheme": true,
+        "property": "payload",
+        "secondary": "secondary",
+        "inline": false,
+        "animate": true,
+        "sectors": [
+            {
+                "val": -20,
+                "col": "#00ffff",
+                "t": "min",
+                "dot": 0
+            },
+            {
+                "val": 20,
+                "col": "#008000",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 49,
+                "col": "#ff0000",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 50,
+                "col": "#ff0000",
+                "t": "max",
+                "dot": 0
+            }
+        ],
+        "lineWidth": "5",
+        "bgcolorFromTheme": false,
+        "diffCenter": "",
+        "x": 1080,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "27688faa061af982",
+        "type": "ui_media",
+        "z": "d968260766f6179a",
+        "g": "1f315ff865ac1469",
+        "group": "f0ea3f3e534120ce",
+        "name": "",
+        "width": 3,
+        "height": 11,
+        "order": 1,
+        "category": "",
+        "file": "",
+        "layout": "adjust",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 1090,
+        "y": 1640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d838b528bb19bae4",
+        "type": "mqtt in",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "",
+        "topic": "letterbox_mail_count",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6d24ee5bc061f8cf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1820,
+        "wires": [
+            [
+                "6f7d917bee6b6f03",
+                "af4c7380467599ee",
+                "9b2c021bcd78ee5f"
+            ]
+        ]
+    },
+    {
+        "id": "6f7d917bee6b6f03",
+        "type": "debug",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "mqtt: letter count",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "af4c7380467599ee",
+        "type": "ui_gauge",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "",
+        "group": "9d3babfa6f091dfa",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Unread messages",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1070,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "9b2c021bcd78ee5f",
+        "type": "switch",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "Filter Email Event",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "5",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "10",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 410,
+        "y": 2060,
+        "wires": [
+            [
+                "33e02e5e87f8d003"
+            ],
+            [
+                "e89908726a4ba958"
+            ],
+            [
+                "f77dadef483063c8"
+            ]
+        ]
+    },
+    {
+        "id": "cd517f3afb274ef7",
+        "type": "e-mail",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "key=ADD API KEY",
+        "secure": true,
+        "tls": true,
+        "name": "ADD RECIPIENT EMAIL ADDRESS",
+        "dname": "",
+        "x": 1060,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "33e02e5e87f8d003",
+        "type": "function",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "function 1",
+        "func": "msg.topic = \"New letter arrived!\"\nmsg.payload = \"Someone must be thinking of you cause there is at least one new letter in your mail box. If I were you, I'd be curious to see what it says, so it's best to pick it up as soon as possible.\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2020,
+        "wires": [
+            [
+                "cd517f3afb274ef7"
+            ]
+        ]
+    },
+    {
+        "id": "e89908726a4ba958",
+        "type": "function",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "function 2",
+        "func": "msg.topic = \"Messages are piling up\"\nmsg.payload = \"So i just wanted to inform you, that there are at least 5 unread letters in your mailbox. Would be good if you check them out soon.\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2060,
+        "wires": [
+            [
+                "cd517f3afb274ef7"
+            ]
+        ]
+    },
+    {
+        "id": "f77dadef483063c8",
+        "type": "function",
+        "z": "d968260766f6179a",
+        "g": "39a03ce5f693386d",
+        "name": "function 3",
+        "func": "msg.topic = \"It's getting full in here\"\nmsg.payload = \"You have more than 10 unread messages. I know invoices aren't nice, but closing your eyes doesn't help either. So it would be good if you picked up the letters right know!\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2100,
+        "wires": [
+            [
+                "cd517f3afb274ef7"
+            ]
+        ]
+    },
+    {
+        "id": "ad99fbd428fae369",
+        "type": "ui_button",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "",
+        "group": "95d2a545f5812884",
+        "order": 10,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Red",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "mi-lightbulb",
+        "payload": "1",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "137177c06685430f",
+        "type": "ui_template",
+        "z": "d968260766f6179a",
+        "group": "ad18e82c8d4fe368",
+        "name": "style",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\np.nr-dashboard-cardtitle {\n        margin-left: 35%;\n        font-size: 20px;\n        font-weight: bold;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 90,
+        "y": 2240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e8d384d826de07d",
+        "type": "ui_button",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "",
+        "group": "95d2a545f5812884",
+        "order": 10,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Green",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "mi-lightbulb",
+        "payload": "2",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 170,
+        "y": 460,
+        "wires": [
+            [
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "3bd8ab9a4093aec7",
+        "type": "ui_button",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "",
+        "group": "95d2a545f5812884",
+        "order": 10,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Blue",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "mi-lightbulb",
+        "payload": "3",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 170,
+        "y": 540,
+        "wires": [
+            [
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "6fc417d0873212c8",
+        "type": "ui_button",
+        "z": "d968260766f6179a",
+        "g": "24f23bd6e70703e2",
+        "name": "",
+        "group": "95d2a545f5812884",
+        "order": 10,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Off",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "mi-lightbulb_outline",
+        "payload": "0",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 170,
+        "y": 620,
+        "wires": [
+            [
+                "9ad556e11742c1f4"
+            ]
+        ]
+    },
+    {
+        "id": "fcc79cf4f2843936",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "9d3babfa6f091dfa",
+        "order": 4,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "f4e23401501a42c8",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "34a0635a33c96ca9",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8732b616d70c653e",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 4,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "f6afb5f95d472c65",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e98c1b1b98688af5",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "033e2c8ce96da1ae",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 8,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "c7630894645df5d9",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8512cdd3d3c1630f",
+        "type": "ui_spacer",
+        "z": "d968260766f6179a",
+        "name": "spacer",
+        "group": "95d2a545f5812884",
+        "order": 11,
+        "width": "7",
+        "height": "5"
+    },
+    {
+        "id": "6d24ee5bc061f8cf",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "ADD BROKER ADDRESS",
+        "port": "8883",
+        "tls": "231474e862b335f9",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9d3babfa6f091dfa",
+        "type": "ui_group",
+        "name": "Mail Box Stat",
+        "tab": "3ed925cf072141e7",
+        "order": 3,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "95d2a545f5812884",
+        "type": "ui_group",
+        "name": "Mail Box Control",
+        "tab": "3ed925cf072141e7",
+        "order": 4,
+        "disp": true,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ad18e82c8d4fe368",
+        "type": "ui_group",
+        "name": "Environment data",
+        "tab": "3ed925cf072141e7",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": "style"
+    },
+    {
+        "id": "f0ea3f3e534120ce",
+        "type": "ui_group",
+        "name": "Vertical Spacer",
+        "tab": "3ed925cf072141e7",
+        "order": 2,
+        "disp": false,
+        "width": 3,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "231474e862b335f9",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "ADD BROKER ADDRESS",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "3ed925cf072141e7",
+        "type": "ui_tab",
+        "name": "IoT Mail Box",
+        "icon": "fa-info",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
