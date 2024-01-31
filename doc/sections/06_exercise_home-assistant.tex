@@ -167,10 +167,10 @@ WiFi.
   \end{tabular}
 \end{table}
 
-Because of my good experience using \texit{MQTT} which was also used for my final project i would use \textit{MQTT} to 
+Because of my good experience using \textit{MQTT} which was also used for my final project i would use \textit{MQTT} to 
 connect all devices to the \textit{Home Assistant} server. This would make it possible to use the \textit{MQTT} broker 
 to connect all devices to the \textit{Home Assistant} server and furthermore make it possible to use the \textit{MQTT} 
-broker to connect the \textit{Home Assistant} server to other services like \textit{Node-RED}.
+broker to connect the \textit{Home Assistant} server to other services like \textit{Node\-RED}.
 
 \subsubsection{Ground Floor}
 The ground floor is designed as the main living area at will be the first page of the dashboard.
@@ -204,45 +204,45 @@ The basement floor is designed as the cleaning and workbench area and will be th
 
 \subsubsection{Sensors}
 
-\subsubsubsection{Smoke Detector}
+\paragraph{Smoke Detector}
 The smoke detector is designed to detect smoke and fire and will be connected to the \textit{Home Assistant} server 
 using \textit{MQTT}. It should be possible to check the status of the smoke detector using the dashboard as well as 
 turning them on and off. Furthermore it should be possible to get a notification if the smoke detector detects smoke or 
 fire. On one side they should notice via alarm sound as well as via notification on the dashboard and via notification 
 on the previously created Discord bot.
 
-\subsubsubsection{Security Entry Devices}
+\paragraph{Security Entry Devices}
 The security entry devices are designed to detect if a door or window is opened or closed and will be connected to the 
 \textit{Home Assistant} server using \textit{MQTT}. It should be possible to check the status of the security entry 
 devices using the dashboard. Like already realized in the final project finger print sensors should be used to 
 authenticate the user. Turn the system on and off should be possible using the dashboard as well as using a 
 command send to the Discord bot.
 
-\subsubsubsection{Smart Environment Sense}
+\paragraph{Smart Environment Sense}
 The smart environment sense is designed to measure the temperature, humidity and CO2 level in the room and will be 
 connected to the \textit{Home Assistant} server using \textit{MQTT}. It should be possible to check the status of the 
 smart environment sense using the dashboard. Furthermore it should be possible to get a notification if the CO2 level 
 is to high.
 
-\subsubsubsection{Smart Environment Controller}
+\paragraph{Smart Environment Controller}
 The smart environment controller is designed to control the heating, cooling and ventilation system and will be 
 connected to the \textit{Home Assistant} server using \textit{MQTT} as well.
 It should be possible to control the heating, cooling and ventilation system using the dashboard for 
 example to set the temperature or turn the system on and off.
 
-\subsubsubsection{Smart Lightning System}
+\paragraph{Smart Lightning System}
 The smart lightning system is designed to control the lights in the rooms.
 It should be possible to control the lights using the dashboard for example to turn the lights on and off or to change 
 the brightness of the lights. As already mentioned in the final project presentation this should only be "IoT as a 
 feature" meaning that it should be possible to control the lights using the dashboard but it should also be possible to 
 control the lights using physical switches.
 
-\subsubsubsection{Smart Entertainment System}
+\paragraph{Smart Entertainment System}
 The smart entertainment system is designed to control the entertainment system in the rooms like the TV or the HiFi.
 It should be possible to control the entertainment system using the dashboard for example to play music or to turn the 
 TV on and off.
 
-\subsubsubsection{Smart Power Consumption System}
+\paragraph{Smart Power Consumption System}
 The smart power consumption system is designed to measure the power consumption of some devices like the Heating, 
 Cooling or Kitchen devices. It should be possible to check the power consumption of the devices using the dashboard 
 but also to export the data to a file to analyze the data like done in exercise 4.
