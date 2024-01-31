@@ -118,3 +118,131 @@ channel.
     \caption{Discord Periodical Message from Home Assistant}
     \label{fig:discord_periodical_message}
 \end{figure}
+
+\subsection{Task 5: Smart Home Planning}
+The last task is about planning a smart home system.
+Therefore it was required to create floor plans for at least a basement floor as well as a ground floor and a first floor.
+First i decided to create a floor plan using a online tool but most tools i found would need a little bit more time to 
+get used to them. Therefore i decided to use the well known tool \textit{Paint} to create the floor plans.
+
+\subsubsection{Import Floor Plan}
+To use the floor plans in \textit{Home Assistant} it is required to import them as image files.
+Therefore i created a new folder \textit{www} in the \textit{Home Assistant} configuration folder and copied the images 
+into this folder. This was done using the \textit{Studio Code Server} extension which makes it possible to use the 
+\textit{Visual Studio Code} editor in the browser and furthermore makes it easy to create and edit files in the 
+\textit{Home Assistant} configuration folder.
+
+After importing the images and restarting the \textit{Home Assistant} server the images can be used in the 
+\textit{Home Assistant} dashboards. I would renewcommand to set the \textit{panel\_custom} configuration to 
+\textit{true} to make it possible to use the images as background images for the dashboards (so they are not compressed).
+
+\subsubsection{Device List}
+To make a interactive floor plan using badges it would be required to add all devices to the \textit{Home Assistant} to 
+control them. As i do not have any smart home devices i decided to just mark the devices in the floor plan like shown bellow.
+As an example there is an badge added to the ground floor using the available sun sensor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{exercise_home-assistant/example_badge.png}
+    \caption{Ground Floor with Badges}
+    \label{fig:ground_floor_badges}
+\end{figure}
+
+The following list shows the devices which are used in the floor plans.
+As it is designed as that all devices are connected to the power grid (not using batterys),  all devices are connected via 
+WiFi.
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{|l|l|l|}
+  \hline
+      Color & Device & Connection \\ \hline
+      Red & Smoke Detector & WiFi \\ \hline
+      Green & Security Entry Devices & WiFi \\ \hline
+      Blue & Smart Environment Controller & WiFi \\ \hline
+      Light Blue & Smart Environment Sensor (Temperature, Humidity, CO2) & WiFi \\ \hline
+      Yellow & Smart Lightning System & WiFi \\ \hline
+      Orange & Smart Entertainment System & WiFi \\ \hline
+      Purple & Smart Power Consumption System & WiFi \\ \hline
+  \end{tabular}
+\end{table}
+
+Because of my good experience using \texit{MQTT} which was also used for my final project i would use \textit{MQTT} to 
+connect all devices to the \textit{Home Assistant} server. This would make it possible to use the \textit{MQTT} broker 
+to connect all devices to the \textit{Home Assistant} server and furthermore make it possible to use the \textit{MQTT} 
+broker to connect the \textit{Home Assistant} server to other services like \textit{Node-RED}.
+
+\subsubsection{Ground Floor}
+The ground floor is designed as the main living area at will be the first page of the dashboard.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{exercise_home-assistant/plan_ground_floor.png}
+    \caption{Ground Floor}
+    \label{fig:ground_floor}
+\end{figure}
+
+\subsubsection{First Floor}
+The first floor is designed as the sleeping area and will be the second page of the dashboard.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{exercise_home-assistant/plan_first_floor.png}
+    \caption{First Floor}
+    \label{fig:first_floor}
+\end{figure}
+
+\subsubsection{Basement Floor}
+The basement floor is designed as the cleaning and workbench area and will be the third page of the dashboard.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{exercise_home-assistant/plan_basement_floor.png}
+    \caption{Basement Floor}
+    \label{fig:basement_floor}
+\end{figure}
+
+\subsubsection{Sensors}
+
+\subsubsubsection{Smoke Detector}
+The smoke detector is designed to detect smoke and fire and will be connected to the \textit{Home Assistant} server 
+using \textit{MQTT}. It should be possible to check the status of the smoke detector using the dashboard as well as 
+turning them on and off. Furthermore it should be possible to get a notification if the smoke detector detects smoke or 
+fire. On one side they should notice via alarm sound as well as via notification on the dashboard and via notification 
+on the previously created Discord bot.
+
+\subsubsubsection{Security Entry Devices}
+The security entry devices are designed to detect if a door or window is opened or closed and will be connected to the 
+\textit{Home Assistant} server using \textit{MQTT}. It should be possible to check the status of the security entry 
+devices using the dashboard. Like already realized in the final project finger print sensors should be used to 
+authenticate the user. Turn the system on and off should be possible using the dashboard as well as using a 
+command send to the Discord bot.
+
+\subsubsubsection{Smart Environment Sense}
+The smart environment sense is designed to measure the temperature, humidity and CO2 level in the room and will be 
+connected to the \textit{Home Assistant} server using \textit{MQTT}. It should be possible to check the status of the 
+smart environment sense using the dashboard. Furthermore it should be possible to get a notification if the CO2 level 
+is to high.
+
+\subsubsubsection{Smart Environment Controller}
+The smart environment controller is designed to control the heating, cooling and ventilation system and will be 
+connected to the \textit{Home Assistant} server using \textit{MQTT} as well.
+It should be possible to control the heating, cooling and ventilation system using the dashboard for 
+example to set the temperature or turn the system on and off.
+
+\subsubsubsection{Smart Lightning System}
+The smart lightning system is designed to control the lights in the rooms.
+It should be possible to control the lights using the dashboard for example to turn the lights on and off or to change 
+the brightness of the lights. As already mentioned in the final project presentation this should only be "IoT as a 
+feature" meaning that it should be possible to control the lights using the dashboard but it should also be possible to 
+control the lights using physical switches.
+
+\subsubsubsection{Smart Entertainment System}
+The smart entertainment system is designed to control the entertainment system in the rooms like the TV or the HiFi.
+It should be possible to control the entertainment system using the dashboard for example to play music or to turn the 
+TV on and off.
+
+\subsubsubsection{Smart Power Consumption System}
+The smart power consumption system is designed to measure the power consumption of some devices like the Heating, 
+Cooling or Kitchen devices. It should be possible to check the power consumption of the devices using the dashboard 
+but also to export the data to a file to analyze the data like done in exercise 4.
